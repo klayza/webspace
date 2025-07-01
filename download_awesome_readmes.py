@@ -57,6 +57,14 @@ def main():
         logging.warning("No GitHub links found in the main readme.md file.")
         return
 
+    # Save the list of source repositories to sources.md
+    sources_path = 'sources.md'
+    with open(sources_path, 'w', encoding='utf-8') as f:
+        f.write("# Source Awesome Repositories\n\n")
+        for repo in sorted(github_repos):
+            f.write(f"- https://github.com/{repo}\n")
+    logging.info(f"Successfully saved {len(github_repos)} source links to {sources_path}")
+
     # 3. Download each repository's README.md
     downloaded_count = 0
     for repo in github_repos:
